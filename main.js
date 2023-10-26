@@ -13,7 +13,11 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
+
+//Shadow settings
 renderer.shadowMap.enabled = true;
+renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+
 camera.position.setZ(50);
 camera.position.setX(-3);
 
@@ -47,7 +51,7 @@ const moonTexture = new THREE.TextureLoader().load('2k_moon.jpg');
 const normalTexture = new THREE.TextureLoader().load('moon-normalmap.jpg');
 
 const moon = new THREE.Mesh(
-  new THREE.SphereGeometry(3, 32, 32),
+  new THREE.SphereGeometry(2, 32, 32),
   new THREE.MeshStandardMaterial({
     map: moonTexture,
     normalMap: normalTexture
@@ -62,7 +66,7 @@ const earthTexture = new THREE.TextureLoader().load('earth_daymap.jpg');
 const earthNormal = new THREE.TextureLoader().load('2k_earth_normal_map.png');
 
 const earth = new THREE.Mesh(
-  new THREE.SphereGeometry(16, 64, 64),
+  new THREE.SphereGeometry(16, 128, 128),
   new THREE.MeshStandardMaterial({
     map: earthTexture,
     normalMap: earthNormal
@@ -95,15 +99,14 @@ scene.fog = new THREE.FogExp2(0xcccccc, 0.001);
 //LIGHT
 
 //Point
-const pointLightMoon = new THREE.PointLight(0xebd394, 150, 100);
+const pointLightMoon = new THREE.PointLight(0xebd394, 100, 500);
 pointLightMoon.position.set(-30, 0, 30);
-
-const pointLightEarth = new THREE.PointLight(0xffffff, 100, 40);
-pointLightEarth.position.set(0, 0, 0);
 
 const pointLightSun = new THREE.PointLight(0xebd394, 100, 1000, 0.7);
 pointLightSun.position.set(-90, 50, 90);
 pointLightSun.castShadow = true;
+pointLightSun.shadow.mapSize.width = 2048;
+pointLightSun.shadow.mapSize.height = 2048;
 
 //Spot
 const spotLight = new THREE.SpotLight(0xffffff, 400);
@@ -114,7 +117,7 @@ spotLight.target = profile;
 //Ambient
 const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 
-scene.add(/*spotLight,*/ pointLightMoon, pointLightEarth, pointLightSun, ambientLight);
+scene.add(/*spotLight,*/ pointLightMoon, pointLightSun, /*ambientLight*/);
 
 //HELPERS
 //////////////////////////////////////////////////////////////////////////////////////
@@ -183,7 +186,7 @@ function moveCamera() {
   camera.position.y = t * 0.002;
 
   earth.position.y = Math.sin(camera.position.y / 4 - 0.5 * Math.PI) * 10 - 20;
-  pointLightEarth.position.y = earth.position.y;
+  //pointLightEarth.position.y = earth.position.y;
 
   torus.position.set(camera.position.x, camera.position.y, camera.position.z - 6);
   profile.position.set(torus.position.x + 5.3, torus.position.y + 2, torus.position.z + 2);
