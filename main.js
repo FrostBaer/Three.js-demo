@@ -37,7 +37,7 @@ scene.add(torus);
 //TEXTURE MAPPING
 
 //Cube
-const profileTexture = new THREE.TextureLoader().load('cat.jpg');
+const profileTexture = new THREE.TextureLoader().load('assets/cat.jpg');
 const profile = new THREE.Mesh(
   new THREE.PlaneGeometry(1, 1, 3, 3),
   //new THREE.BoxGeometry(1, 1, 1),
@@ -47,8 +47,8 @@ const profile = new THREE.Mesh(
 //scene.add(profile);
 
 //Moon
-const moonTexture = new THREE.TextureLoader().load('2k_moon.jpg');
-const normalTexture = new THREE.TextureLoader().load('moon-normalmap.jpg');
+const moonTexture = new THREE.TextureLoader().load('assets/2k_moon.jpg');
+const normalTexture = new THREE.TextureLoader().load('assets/moon-normalmap.jpg');
 
 const moon = new THREE.Mesh(
   new THREE.SphereGeometry(2, 32, 32),
@@ -62,8 +62,8 @@ moon.position.set(-30, 0, 30);
 moon.castShadow = true;
 
 //Earth
-const earthTexture = new THREE.TextureLoader().load('earth_daymap.jpg');
-const earthNormal = new THREE.TextureLoader().load('2k_earth_normal_map.png');
+const earthTexture = new THREE.TextureLoader().load('assets/earth_daymap.jpg');
+const earthNormal = new THREE.TextureLoader().load('assets/2k_earth_normal_map.png');
 
 const earth = new THREE.Mesh(
   new THREE.SphereGeometry(16, 128, 128),
@@ -77,8 +77,8 @@ earth.receiveShadow = true;
 scene.add(earth);
 
 //Sun
-const sunTexture = new THREE.TextureLoader().load('2k_sun.jpg');
-const sunNormal = new THREE.TextureLoader().load('2k_sun.jpg');
+const sunTexture = new THREE.TextureLoader().load('assets/2k_sun.jpg');
+const sunNormal = new THREE.TextureLoader().load('assets/2k_sun.jpg');
 
 const sun = new THREE.Mesh(
   new THREE.SphereGeometry(24, 64, 64),
@@ -133,7 +133,7 @@ scene.add(/*spotLight,*/ pointLightMoon, pointLightSun, /*ambientLight*/);
 
 // FILL BG WITH STARS
 function addStar() {
-  const starNormalTexture = new THREE.TextureLoader().load('normal.jpg');
+  const starNormalTexture = new THREE.TextureLoader().load('assets/normal.jpg');
   const geometry = new THREE.SphereGeometry(0.25, 24, 24);
   const material = new THREE.MeshStandardMaterial
     ({
@@ -150,7 +150,7 @@ function addStar() {
 }
 
 function addStarBig() {
-  const starNormalTexture = new THREE.TextureLoader().load('normal.jpg');
+  const starNormalTexture = new THREE.TextureLoader().load('assets/normal.jpg');
   const geometry = new THREE.SphereGeometry(0.75, 24, 24);
   const material = new THREE.MeshStandardMaterial
     ({
@@ -171,7 +171,7 @@ Array(10).fill().forEach(addStarBig);
 
 //BACKGROUND
 
-const spaceTexture = new THREE.TextureLoader().load('2k_stars_milky_way.jpg');
+const spaceTexture = new THREE.TextureLoader().load('assets/2k_stars_milky_way.jpg');
 scene.background = spaceTexture;
 
 //MOVE CAMERA
