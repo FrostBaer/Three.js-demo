@@ -7,8 +7,10 @@ const scene = new THREE.Scene();
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
+const canvas = document.querySelector('#bg');
+
 const renderer = new THREE.WebGLRenderer({
-  canvas: document.querySelector('#bg'),
+  canvas: canvas,
 });
 
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -115,9 +117,9 @@ spotLight.castShadow = true;
 spotLight.target = profile;
 
 //Ambient
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.02);
 
-scene.add(/*spotLight,*/ pointLightMoon, pointLightSun, /*ambientLight*/);
+scene.add(/*spotLight,*/ pointLightMoon, pointLightSun, ambientLight);
 
 //HELPERS
 //////////////////////////////////////////////////////////////////////////////////////
@@ -194,7 +196,7 @@ function moveCamera() {
 
 document.body.onscroll = moveCamera;
 
-//MOVE OBJECT
+//MOVE OBJECTS
 
 // Move moon
 
@@ -257,10 +259,6 @@ function moveSun(obj, light, speed) {
   light.position.set(obj.position.x, obj.position.y, obj.position.z);
 }
 
-// Move profile
-
-
-
 //ANIMATE
 function animate() {
   requestAnimationFrame(animate);
@@ -285,3 +283,13 @@ function animate() {
 }
 
 animate();
+
+
+function onWindowResize(){
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+}
+
+window.addEventListener('resize', onWindowResize);

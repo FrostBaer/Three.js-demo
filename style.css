@@ -45,6 +45,9 @@ header {
   font-size: 2.5rem;
   padding: 2rem;
   margin-bottom: var(--spacing);
+  border-radius: 10px;
+  box-shadow: 4px 4px 3px rgba(224, 17, 17, 0.5);
+  width: fit-content;
 }
 
 section {
@@ -64,11 +67,14 @@ blockquote {
 }
 
 blockquote p {
-  color: black;
-  background-color: white;
+  color: rgb(255, 255, 255);
   font-size: 4rem;
   display: inline;
-  line-height: 1;
+  line-height: 1; 
+  text-shadow:
+  1px 1px 2px rgb(206, 206, 206),
+  0 0 1em rgb(126, 125, 125),
+  0 0 0.2em rgb(255, 0, 0);
 }
 
 .left {
